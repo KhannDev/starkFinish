@@ -51,10 +51,10 @@ export const erc20Abi = {
         },
         {
           type: "function",
-          name: "log_calories",
+          name: "log_score",
           inputs: [
             {
-              name: "calories",
+              name: "scores",
               type: "core::felt252",
             },
           ],
@@ -63,7 +63,7 @@ export const erc20Abi = {
         },
         {
           type: "function",
-          name: "get_calories",
+          name: "get_score",
           inputs: [],
           outputs: [
             {

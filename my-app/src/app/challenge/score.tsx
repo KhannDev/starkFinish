@@ -5,7 +5,6 @@ import { Account, Chain, Hex, Transport, WalletClient } from "viem";
 import { Call, Contract } from "starknet";
 import { erc20Abi } from "@/app/challenge/abi2";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
-// import useGoogleFitness from "../../hooks/useGoogleFitness";
 
 import Tesseract from "tesseract.js";
 
@@ -96,7 +95,7 @@ const ScoreChallenge: React.FC = () => {
 
       const challgenContract = new Contract(
         erc20Abi.abi,
-        "0x0556a6fae70f130ef661954c466c8426de77da2b42140b03c33c6865ddb0088d",
+        "0x00f3cb78a013aaa36c2a9bdcb214aed944281ad0acb4a80b1306c06ee57eb678",
         provider as any
       );
       const transferCallData: Call = challgenContract.populate(
@@ -127,7 +126,7 @@ const ScoreChallenge: React.FC = () => {
 
       const challgenContract = new Contract(
         erc20Abi.abi,
-        "0x0556a6fae70f130ef661954c466c8426de77da2b42140b03c33c6865ddb0088d",
+        "0x00f3cb78a013aaa36c2a9bdcb214aed944281ad0acb4a80b1306c06ee57eb678",
         provider as any
       );
       const transferCallData: Call = challgenContract.populate("withdraw", {
@@ -160,7 +159,7 @@ const ScoreChallenge: React.FC = () => {
 
       const challgenContract = new Contract(
         erc20Abi.abi,
-        "0x0556a6fae70f130ef661954c466c8426de77da2b42140b03c33c6865ddb0088d",
+        "0x00f3cb78a013aaa36c2a9bdcb214aed944281ad0acb4a80b1306c06ee57eb678",
         provider as any
       );
       const transferCallData: Call = challgenContract.populate("scores", {
