@@ -1,0 +1,1 @@
+{"version":1,"contracts":[{"id":"pcrbna14tgpke","package_name":"starknet_multiple_contracts","contract_name":"SimpleVault","module_path":"starknet_multiple_contracts::todolist::SimpleVault","artifacts":{"sierra":"starknet_multiple_contracts_SimpleVault.contract_class.json","casm":"starknet_multiple_contracts_SimpleVault.compiled_contract_class.json"}}]}

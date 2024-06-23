@@ -27,8 +27,8 @@ pub trait ISimpleVault<TContractState> {
     fn deposit(ref self: TContractState, amount: felt252);
     fn challengeAndDeposit(ref self: TContractState, amount: felt252, challenge: felt252);
     fn withdraw(ref self: TContractState, amount: felt252);
-    fn log_calories(ref self: TContractState, calories: felt252);
-    fn get_calories(ref self: TContractState) -> felt252;
+    fn log_score(ref self: TContractState, scores: felt252);
+    fn get_score(ref self: TContractState) -> felt252;
     fn set_challenge(ref self: TContractState, challenge: felt252);
     fn get_challenge(ref self: TContractState) -> felt252;
 }
@@ -43,8 +43,8 @@ pub mod SimpleVault {
         token: IERC20Dispatcher,
         total_supply: felt252,
         balance_of: LegacyMap<ContractAddress, felt252>,
-        calories_burned: LegacyMap<ContractAddress, felt252>,
-        calorie_challenge: LegacyMap<ContractAddress, felt252>
+        score_set: LegacyMap<ContractAddress, felt252>,
+        score_challenge: LegacyMap<ContractAddress, felt252>
     }
 
     #[constructor]
@@ -65,14 +65,14 @@ pub mod SimpleVault {
             let caller = get_caller_address();
             let this = get_contract_address();
             self.balance_of.write(caller, self.balance_of.read(caller) + amount);
-            self.calorie_challenge.write(caller, challenge);
+            self.score_challenge.write(caller, challenge);
             self.token.read().transfer_from(caller, this, amount);
         }
 
         fn withdraw(ref self: ContractState, amount: felt252) {
             let caller = get_caller_address();
-            let challenge = self.calorie_challenge.read(caller);
-            let burned = self.calories_burned.read(caller);
+            let challenge = self.score_challenge.read(caller);
+            let burned = self.score_set.read(caller);
             let burnedNumber: u256 = burned.into();
             let challengenumber: u256 = challenge.into();
             assert!(burnedNumber > challengenumber, "NOT_COMPLETED");
@@ -81,24 +81,24 @@ pub mod SimpleVault {
             
         }
 
-        fn log_calories(ref self: ContractState, calories: felt252) {
+        fn log_score(ref self: ContractState, scores: felt252) {
             let caller = get_caller_address();
-            self.calories_burned.write(caller, self.calories_burned.read(caller) + calories);
+            self.score_set.write(caller, self.score_set.read(caller) + scores);
         }
 
-        fn get_calories(ref self: ContractState) -> felt252 {
+        fn get_score(ref self: ContractState) -> felt252 {
             let caller = get_caller_address();
-            self.calories_burned.read(caller)
+            self.score_set.read(caller)
         }
 
         fn set_challenge(ref self: ContractState, challenge: felt252) {
             let caller = get_caller_address();
-            self.calorie_challenge.write(caller, challenge);
+            self.score_set.write(caller, challenge);
         }
 
         fn get_challenge(ref self: ContractState) -> felt252 {
             let caller = get_caller_address();
-            self.calorie_challenge.read(caller)
+            self.score_set.read(caller)
         }
 
     }
